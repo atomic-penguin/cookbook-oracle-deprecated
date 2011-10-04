@@ -91,7 +91,7 @@ override["kernel"]["semopm"] = node["kernel"]["semmsl"]
 if node["kernel"]["machine"] =~ /^(x|i[3456])86$/i
   # Set shmmax to lower of 2350000000, or half of memory.
   if ( node["memory"]["total"].to_i > memory_fourgb )
-    override["kernel"]["shmmax"] = 2350000000
+    override["kernel"]["shmmax"] = 3000000000
   else
     override["kernel"]["shmmax"] = ( ( node["memory"]["total"].to_i * 1024 ) / 2 )
   end

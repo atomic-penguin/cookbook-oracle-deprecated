@@ -19,7 +19,7 @@
 
 include_recipe "x-windows"
 include_recipe "gnome"
-override["sysctl"]["is_oracle"] = true
+node.set["sysctl"]["is_oracle"] = true
 
 node["oracle"]["db_packages"].each do |db_package|
   package db_package
