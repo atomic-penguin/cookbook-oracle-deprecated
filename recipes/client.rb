@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-override["sysctl"]["is_oracle_client"] = true
+node.set["sysctl"]["is_oracle_client"] = true
 
 node["oracle"]["client_packages"].each do |client_package|
   package client_package
