@@ -1,7 +1,7 @@
 {
   "name": "oracle",
   "description": "Installs/Configures oracle pre-requisites.",
-  "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
+  "long_description": "DESCRIPTION:\n===========\n\n  This cookbook configures the pre-requisites for Oracle DB systems.\nIt depends on the x-windows, and gnome cookbooks for package requirements.\nAlso there is a dependency on the el-sysctl cookbook for kernel parameters.\n\n  The cookbook does not install any components of Oracle, it simply\nprepares the system for Oracle.\n\nREQUIREMENTS:\n=============\n\nRequired Cookbooks\n---------------------\n\n  * el-sysctl\n  * x-windows\n  * gnome\n\nATTRIBUTES:\n===========\n\nOracle DB\n---------\n\n  * oracle (namespace)\n    - [\"version\"]: 10 or 11, default 11\n    - [\"dbas\"]: An array of usernames to add to the dba group.\n    - [\"db_packages\"]: An array of packages required for Oracle DB\n    - [\"client_packages\"]: An array of packages for Oracle client software\n    - [\"processes\"]: PROCESSES paramenter from init.ora file, default 240\n\n  * sysctl (namespace)\n    - [\"is_oracle_client\"]: Either this or is_oracle needs to be true for el-sysctl\n    - [\"is_oracle\"]: Either this or is_oracle_client needs to be true for el-sysctl\n    - [\"vm\"][\"nr_hugepages\"]: Use included hugepage_settings script to calculate\n    - NOTE: Other sysctl parameters are calculated within the attributes/default file\n        according to Oracle pre-installation requirements. \n\nUSAGE:\n======\n\n  Here is an example Oracle role, one might add for Chef.\n\n```\nname \"oracle\"\ndescription \"Install Oracle pre-requisites\"\noverride_attributes \"sysctl\" => {\n  \"is_oracle\" => true\n},\n\"oracle\" => {\n  \"dbas\" => [ \"bob\" ],\n  \"version\" => 10,\n  \"processes\" => 512\n}\n```\n\nLICENSE AND AUTHOR:\n===================\n\nCopyright 2010-2011, Eric G. Wolfe\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n\n",
   "maintainer": "Eric G. Wolfe",
   "maintainer_email": "wolfe21@marshall.edu",
   "license": "Apache 2.0",
@@ -11,7 +11,7 @@
     "scientific": ">= 5.0"
   },
   "dependencies": {
-    "sysctl": ">= 0.0.0",
+    "el-sysctl": ">= 0.0.0",
     "x-windows": ">= 0.0.0",
     "gnome": ">= 0.0.0"
   },
@@ -20,6 +20,7 @@
   "suggestions": {
   },
   "conflicting": {
+    "sysctl": ">= 0.0.0"
   },
   "providing": {
   },
@@ -29,7 +30,6 @@
     "oracle/version": {
       "display_name": "oracle/version",
       "description": "Should be 10, or 11",
-      "default": "10",
       "choice": [
 
       ],
@@ -71,7 +71,6 @@
       "display_name": "oracle/processes",
       "description": "Recommend setting this equal to the number of PROCESSES in init.ora files",
       "required": "recommended",
-      "default": "240",
       "choice": [
 
       ],
@@ -162,7 +161,6 @@
     "kernel/shmall": {
       "display_name": "kernel/shmall",
       "description": "maximum number of shared memory segments, in pages. Defaults to 2097152",
-      "default": "2097152",
       "choice": [
 
       ],
@@ -176,7 +174,6 @@
     "kernel/shmmni": {
       "display_name": "kernel/shmmni",
       "description": "System wide maximum number of shared memory segments. Default is 4096",
-      "default": "4096",
       "required": "optional",
       "choice": [
 
@@ -191,7 +188,6 @@
       "display_name": "kernel/fs/file_max",
       "description": "Maximum number of file descriptors system-wide. Default is 65536",
       "required": "optional",
-      "default": "65536",
       "choice": [
 
       ],
@@ -205,7 +201,6 @@
       "display_name": "fs/aio_max_nr",
       "description": "Maximum number of outstanding concurrent I/O requests",
       "required": "optional",
-      "default": "65536",
       "choice": [
 
       ],
@@ -219,7 +214,6 @@
       "display_name": "net/ipv4/ip_local_port_range",
       "description": "Set available unprivileged ports. Defaults to 1024 through 65000",
       "required": "optional",
-      "default": "1024 65000",
       "choice": [
 
       ],
@@ -232,7 +226,6 @@
     "net/core/rmem_default": {
       "display_name": "net/core/rmem_default",
       "description": "Default read buffer size for networking.",
-      "default": "262144",
       "required": "optional",
       "choice": [
 
@@ -246,7 +239,6 @@
     "net/core/wmem_default": {
       "display_name": "net/core/wmem_default",
       "description": "Default write buffer size for networking.",
-      "default": "262144",
       "required": "optional",
       "choice": [
 
@@ -261,7 +253,6 @@
       "display_name": "net/core/rmem_max",
       "description": "Maximum read buffer size for networking.",
       "required": "optional",
-      "default": "262144",
       "choice": [
 
       ],
@@ -275,7 +266,6 @@
       "display_name": "net/core/wmem_max",
       "description": "Maximum write buffer size for networking.",
       "required": "optional",
-      "default": "262144",
       "choice": [
 
       ],
@@ -290,5 +280,5 @@
   },
   "recipes": {
   },
-  "version": "0.0.6"
+  "version": "0.0.9"
 }
