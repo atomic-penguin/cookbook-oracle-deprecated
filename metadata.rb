@@ -3,7 +3,7 @@ maintainer_email "wolfe21@marshall.edu"
 license          "Apache 2.0"
 description      "Installs/Configures oracle pre-requisites."
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.0.8"
+version          "0.0.9"
 depends          "el-sysctl"
 depends          "x-windows"
 depends          "gnome"
@@ -17,8 +17,7 @@ end
 # Array with required packages for Oracle 10gr2 x86 & x86_64
 attribute "oracle/version",
   :display_name => "oracle/version",
-  :description => "Should be 10, or 11",
-  :default => "11"
+  :description => "Should be 10, or 11"
 
 attribute "oracle/dbas",
   :display_name => "oracle/dbas",
@@ -35,8 +34,7 @@ attribute "oracle/required_packages",
 attribute "oracle/processes",
   :display_name => "oracle/processes",
   :description => "Recommend setting this equal to the number of PROCESSES in init.ora files",
-  :required => "recommended",
-  :default => "240"
+  :required => "recommended"
 
 # PAM Security limits for oracle user
 attribute "security/limits",
@@ -73,53 +71,44 @@ attribute "kernel/semopm",
 # Recommended minimum values in accordance with Oracle documentation
 attribute "kernel/shmall",
   :display_name => "kernel/shmall",
-  :description => "maximum number of shared memory segments, in pages. Defaults to 2097152",
-  :default => "2097152"
+  :description => "maximum number of shared memory segments, in pages. Defaults to 2097152"
 
 attribute "kernel/shmmni",
   :display_name => "kernel/shmmni",
   :description => "System wide maximum number of shared memory segments. Default is 4096",
-  :default => "4096",
   :required => "optional"
 
 attribute "fs/file_max",
   :display_name => "kernel/fs/file_max",
   :description => "Maximum number of file descriptors system-wide. Default is 65536",
-  :required => "optional",
-  :default => "65536"
+  :required => "optional"
 
 attribute "fs/aio_max_nr",
   :display_name => "fs/aio_max_nr",
   :description => "Maximum number of outstanding concurrent I/O requests",
-  :required => "optional",
-  :default => "65536"
+  :required => "optional"
 
 attribute "net/ipv4/ip_local_port_range",
   :display_name => "net/ipv4/ip_local_port_range",
   :description => "Set available unprivileged ports. Defaults to 1024 through 65000",
-  :required => "optional",
-  :default => "1024 65000"
+  :required => "optional"
 
 attribute "net/core/rmem_default",
   :display_name => "net/core/rmem_default",
   :description => "Default read buffer size for networking.",
-  :default => "262144",
   :required => "optional"
 
 attribute "net/core/wmem_default",
   :display_name => "net/core/wmem_default",
   :description => "Default write buffer size for networking.",
-  :default => "262144",
   :required => "optional"
 
 attribute "net/core/rmem_max",
   :display_name => "net/core/rmem_max",
   :description => "Maximum read buffer size for networking.",
-  :required => "optional",
-  :default => "262144"
+  :required => "optional"
 
 attribute "net/core/wmem_max",
   :display_name => "net/core/wmem_max",
   :description => "Maximum write buffer size for networking.",
-  :required => "optional",
-  :default => "262144"
+  :required => "optional"
