@@ -1,0 +1,25 @@
+---     
+driver_plugin: vagrant
+platforms:
+- name: centos-6.3
+  driver_config:
+    box: opscode-centos-6.3
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-centos-6.3.box
+    customize:
+        memory: 3072
+    run_list: []
+- name: centos-5.8
+  driver_config:
+    box: opscode-centos-5.8
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-centos-5.8.box
+    customize:
+        memory: 3072
+    run_list: []
+suites:
+- name: default
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[oracle]
+  attributes:
+    oracle:
+      headless: true

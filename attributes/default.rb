@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+default["oracle"]["headless"] = false
+
 default["oracle"]["version"] = 11
 default["oracle"]["dbas"] = [ "oracle" ]
 
@@ -49,7 +51,6 @@ default["oracle"]["db_packages"] = [
   "openmotif-devel",
   "make",
   "numactl-devel",
-  "pdksh",
   "sysstat"
 ]
 
