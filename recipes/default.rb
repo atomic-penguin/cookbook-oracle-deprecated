@@ -17,8 +17,11 @@
 # limitations under the License.
 #
 
-include_recipe "x-windows"
-include_recipe "gnome"
+if node['oracle']['headless'] == false
+  include_recipe "x-windows"
+  include_recipe "gnome"
+end
+
 node.set["sysctl"]["is_oracle"] = true
 
 node["oracle"]["db_packages"].each do |db_package|
@@ -45,20 +48,19 @@ cookbook_file "/usr/local/bin/hugepage_settings" do
   mode 0755
 end
 
-group "dba" do
-  gid 200
-  ignore_failure true
-  members node["oracle"]["dbas"]
-end
-
 user "oracle" do
   comment "Oracle Service Account - DBA"
   uid 200
-  gid "dba"
   home "/home/oracle"
   shell "/bin/bash"
   ignore_failure true
   supports :manage_home => true
+end
+
+group "dba" do
+  gid 200
+  ignore_failure true
+  members node["oracle"]["dbas"]
 end
 
 directory "/u01/app/oracle" do
